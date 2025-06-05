@@ -17,7 +17,8 @@
 
 2. 下記コマンドでDockerコンテナを起動する
     ```
-    docker-compose up
+    docker-compose build
+    docker-compose up -d
     ```
 
 3. ブラウザで `https://<マシンのIPアドレス>` にアクセスする
