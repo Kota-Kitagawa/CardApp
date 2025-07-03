@@ -14,16 +14,18 @@ services:
     command: sh -c "npm install && npm run dev"
 
   db:
-    image: mysql:latest
+    build:
+      context: ./mysql
+      dockerfile: Dockerfile
     container_name: mysql
     restart: always
     ports:
       - "3306:3306"
     environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     volumes:
       - db_data:/var/lib/mysql
 
@@ -38,3 +40,7 @@ services:
       - "443:443"
     depends_on:
       - app
+      - db
+
+volumes:
+  db_data:
