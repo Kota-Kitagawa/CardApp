@@ -29,18 +29,6 @@ services:
     volumes:
       - db_data:/var/lib/mysql
 
-  
-  nginx:
-    container_name: server
-    build:
-      context: ./nginx
-      dockerfile: Dockerfile
-    ports:
-      - "80:80"
-      - "443:443"
-    depends_on:
-      - app
-      - db
 
 volumes:
   db_data:
